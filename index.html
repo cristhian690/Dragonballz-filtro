@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dragon Ball Filtro</title>
+</head>
+<body>
+
+<h2>Filtrar por raza</h2>
+
+<select id="raza">
+  <option value="">-- Seleccionar --</option>
+  <option value="Human">Humano</option>
+  <option value="Saiyan">Saiyan</option>
+  <option value="Namekian">Namekian</option>
+  <option value="Majin">Majin</option>
+  <option value="Frieza Race">Freezer Race</option>
+  <option value="Android">Android</option>
+  <option value="Jiren Race">Jiren Race</option>
+  <option value="God">God</option>
+  <option value="Angel">Angel</option>
+  <option value="Evil">Evil</option>
+  <option value="Nucleico">Nucleico</option>
+  <option value="Nucleico benigno">Nucleico benigno</option>
+</select>
+
+<button id="mostrar">Mostrar</button>
+
+<hr>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Ki</th>
+      <th>Genero</th>
+      <th>Imagen</th>
+      <th>Detalle</th>
+    </tr>
+  </thead>
+  <tbody id="tabla"></tbody>
+</table>
+
+<hr>
+
+<h3>Detalle</h3>
+<h4 id="detalleNombre"></h4>
+<img id="detalleImg" width="200">
+<p id="detalleDesc"></p>
+
+<script>
+const btn = document.getElementById("mostrar");
+const tabla = document.getElementById("tabla");
+
+
+</script>
+
+</body>
+</html>
