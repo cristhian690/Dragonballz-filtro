@@ -6,53 +6,94 @@
 </head>
 <body>
 
-<h2>Filtrar por raza</h2>
+<h2>Seleccionar raza</h2>
 
 <select id="raza">
   <option value="">-- Seleccionar --</option>
-  <option value="Human">Humano</option>
   <option value="Saiyan">Saiyan</option>
-  <option value="Namekian">Namekian</option>
-  <option value="Majin">Majin</option>
-  <option value="Frieza Race">Freezer Race</option>
-  <option value="Android">Android</option>
-  <option value="Jiren Race">Jiren Race</option>
-  <option value="God">God</option>
-  <option value="Angel">Angel</option>
-  <option value="Evil">Evil</option>
-  <option value="Nucleico">Nucleico</option>
-  <option value="Nucleico benigno">Nucleico benigno</option>
+  <option value="Human">Humano</option>
+  <option value="Namekian">Namekiano</option>
 </select>
 
-<button id="mostrar">Mostrar</button>
+<button onclick="cargar()">Mostrar</button>
 
 <hr>
 
+
 <table border="1">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Nombre</th>
-      <th>Ki</th>
-      <th>Genero</th>
-      <th>Imagen</th>
-      <th>Detalle</th>
-    </tr>
-  </thead>
-  <tbody id="tabla"></tbody>
+<thead>
+<tr>
+<th>#</th>
+<th>Nombre</th>
+<th>Ki</th>
+<th>Genero</th>
+<th>Imagen</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody id="tabla"></tbody>
 </table>
 
 <hr>
 
-<h3>Detalle</h3>
-<h4 id="detalleNombre"></h4>
-<img id="detalleImg" width="200">
-<p id="detalleDesc"></p>
+
+<h3>Personaje</h3>
+<h4 id="nombreP"></h4>
+<img id="imgP" width="200">
+
+<h4>Transformaciones</h4>
+<select id="transformaciones"></select>
+<button id="btnVer" onclick="verTransformacion()">Ver</button>
+
+<hr>
+
+
+<h3>Transformación</h3>
+<h4 id="nombreT"></h4>
+<img id="imgT" width="200">
+<p id="descT"></p>
+
+<hr>
+
+
+<h3>Descripción del personaje</h3>
+<p id="descP"></p>
 
 <script>
-const btn = document.getElementById("mostrar");
-const tabla = document.getElementById("tabla");
 
+let transformaciones = [];
+let descripcionPersonaje = "";
+
+function cargar() {
+  const raza = document.getElementById("raza").value;
+
+  fetch("https://dragonball-api.com/api/characters?limit=100")
+    .then(res => res.json())
+    .then(data => {
+
+      let personajes = data.items;
+
+      personajes = personajes.filter(p => p.race === raza);
+
+      let html = "";
+
+      personajes.forEach((p, i) => {
+        html += `
+          <tr>
+            <td>${i+1}</td>
+            <td>${p.name}</td>
+            <td>${p.ki}</td>
+            <td>${p.gender}</td>
+            <td><img src="${p.image}" width="50"></td>
+            <td><button onclick="verPersonaje(${p.id})">Ver</button></td>
+          </tr>
+        `;
+      });
+
+      document.getElementById("tabla").innerHTML = html;
+
+    });
+}
 
 </script>
 
