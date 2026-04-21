@@ -95,6 +95,43 @@ function cargar() {
     });
 }
 
+function verPersonaje(id) {
+
+  fetch(`https://dragonball-api.com/api/characters/${id}`)
+    .then(res => res.json())
+    .then(data => {
+
+      
+      document.getElementById("nombreP").textContent = data.name;
+      document.getElementById("imgP").src = data.image;
+
+    
+      descripcionPersonaje = data.description || "Sin descripción";
+
+      let select = document.getElementById("transformaciones");
+      let btn = document.getElementById("btnVer");
+
+      select.innerHTML = "";
+
+  
+      if (!data.transformations || data.transformations.length === 0) {
+
+        select.innerHTML = "<option>No tiene transformaciones</option>";
+        select.disabled = true;
+        btn.disabled = true;
+
+        transformaciones = [];
+
+  
+        document.getElementById("nombreT").textContent = data.name;
+        document.getElementById("imgT").src = data.image;
+        document.getElementById("descT").textContent =
+          "Forma base (no tiene transformaciones)";
+
+        document.getElementById("descP").textContent = descripcionPersonaje;
+
+      }
+
 </script>
 
 </body>
