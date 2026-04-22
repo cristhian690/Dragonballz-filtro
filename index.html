@@ -130,7 +130,38 @@ function verPersonaje(id) {
 
         document.getElementById("descP").textContent = descripcionPersonaje;
 
+      }else {
+
+        select.disabled = false;
+        btn.disabled = false;
+
+        data.transformations.forEach((t, i) => {
+          select.innerHTML += `<option value="${i}">${t.name}</option>`;
+        });
+
+        transformaciones = data.transformations;
+
+        verTransformacion();
       }
+
+    });
+}
+
+function verTransformacion() {
+
+  if (!transformaciones || transformaciones.length === 0) return;
+
+  const index = document.getElementById("transformaciones").value;
+  const t = transformaciones[index];
+
+  document.getElementById("nombreT").textContent = t.name;
+  document.getElementById("imgT").src = t.image;
+  document.getElementById("descT").textContent =
+    t.description || "Sin descripción";
+
+ 
+  document.getElementById("descP").textContent = descripcionPersonaje;
+}
 
 </script>
 
